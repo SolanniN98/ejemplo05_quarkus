@@ -51,10 +51,8 @@ public class AuthorRest {
     public Response update(Author author, @PathParam("id") Integer id){
 
         Author aut= repo.findById(id);
-        aut.setNombre(author.getNombre());
-        aut.setApellido(author.getApellido());
-        aut.setNacionalidad(author.getNacionalidad());
-        aut.setBookId(author.getBookId());
+        aut.setFirstName(author.getFirstName());
+        aut.setLastName(author.getLastName());
         return Response.ok().build();
     }
 

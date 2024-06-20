@@ -29,5 +29,8 @@ dependencies {
     implementation("org.postgresql:postgresql:42.7.3")
     implementation("io.quarkus:quarkus-jdbc-postgresql:3.11.2")
 
+    //REST CLIENT
+    implementation("io.quarkus:quarkus-rest-client-reactive")
+    implementation("io.quarkus:quarkus-rest-client-reactive-jackson")
 
 }

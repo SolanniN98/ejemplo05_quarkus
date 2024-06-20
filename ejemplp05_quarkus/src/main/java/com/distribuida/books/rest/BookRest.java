@@ -1,6 +1,8 @@
 package com.distribuida.books.rest;
 
+import com.distribuida.books.clients.AuthorRestClient;
 import com.distribuida.books.db.Book;
+import com.distribuida.books.dtos.BookDto;
 import com.distribuida.books.repository.BooksRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -8,6 +10,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.util.List;
 
@@ -20,9 +23,27 @@ public class BookRest {
     @Inject
     BooksRepository br;
 
+    @Inject
+    @RestClient
+    AuthorRestClient authorRestClient;
+
     @GET
-    public List<Book> findAll() {
-        return br.listAll();
+    public List<BookDto> findAll() {
+
+        var books = br.listAll();
+        return books.stream().
+                map(book -> {
+                    var author = authorRestClient.findById(book.getAuthorId());
+                    BookDto dto = new BookDto();
+
+                    dto.setId(book.getId());
+                    dto.setTitle(book.getTitle());
+                    dto.setIsbn(book.getIsbn());
+                    dto.setPrice(book.getPrice());
+
+                    dto.setAuthorName(author.getFirstName());
+                    return dto;
+                }).toList();
     }
 
     @GET
