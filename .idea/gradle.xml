@@ -6,6 +6,11 @@
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/ejemplo05_author" />
         <option name="gradleHome" value="" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/ejemplo05_author" />
+          </set>
+        </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/ejemplp05_quarkus" />
