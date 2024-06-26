@@ -24,6 +24,8 @@ public class AuthorRest {
 
     @GET
     public List<Author> findAll(){
+        System.out.println("findByAll");
+
         return repo.listAll();
     }
 
