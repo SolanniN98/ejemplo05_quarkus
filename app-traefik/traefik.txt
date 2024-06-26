@@ -1,0 +1,9 @@
+TRAEFIK:
+
+------------------------------
+
+Ejecutar:
+    traefik -api.insecure true
+
+consola:
+    localhost:8080/dashboard

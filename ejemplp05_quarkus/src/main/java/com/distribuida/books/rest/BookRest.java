@@ -10,8 +10,10 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.rest.client.RestClientBuilder;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
+import java.net.URL;
 import java.util.List;
 
 @Path("/books")
@@ -29,8 +31,15 @@ public class BookRest {
 
     @GET
     public List<BookDto> findAll() {
-
+        System.out.println("findAll");
         var books = br.listAll();
+
+        //Metodo API
+        //RestClientBuilder.newBuilder().
+                //baseUrl(new URL("http://localhost:9090")).
+                //build(AuthorRestClient.class);
+
+
         return books.stream().
                 map(book -> {
                     var author = authorRestClient.findById(book.getAuthorId());
