@@ -28,6 +28,7 @@ dependencies {
     // implementation("org.xerial:sqlite-jdbc:3.46.0.0")
     implementation("org.postgresql:postgresql:42.7.3")
     implementation("io.quarkus:quarkus-jdbc-postgresql:3.11.2")
+    //implementation("io.smallrye.stork:stork-service-discovery-static-list:2.6.0")
 
 
 }

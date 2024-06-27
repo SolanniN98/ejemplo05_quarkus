@@ -32,5 +32,6 @@ dependencies {
     //REST CLIENT
     implementation("io.quarkus:quarkus-rest-client-reactive")
     implementation("io.quarkus:quarkus-rest-client-reactive-jackson")
-
+    //Load Balancer
+    implementation("io.smallrye.stork:stork-service-discovery-static-list:2.6.0")
 }
