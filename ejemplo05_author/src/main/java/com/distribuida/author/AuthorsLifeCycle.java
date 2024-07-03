@@ -14,26 +14,36 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.UUID;
-
 @ApplicationScoped
 public class AuthorsLifeCycle {
-    @ConfigProperty(name="consul.port", defaultValue = "8500")
-    private int consulPort;
 
-    @ConfigProperty(name="consul.host", defaultValue = "localhost")
-    private String consulHost;
 
-    @ConfigProperty(name="quarkus.http.port")
+    @ConfigProperty(name = "consul.host", defaultValue = "localhost")
+    private String consultHost;
+
+    //necesario para iniciar el port.
+    @ConfigProperty(name = "consul.port", defaultValue = "8500")
+    private int consultPort;
+
+    @ConfigProperty(name = "quarkus.http.port")
     private int port;
 
+    //id de la instancia y sea unica
     private String serviceId;
-    public void init(@Observes StartupEvent evt, Vertx vertx) throws UnknownHostException {
-        System.out.println("************AuthorLifecycle init");
-        ConsulClient client=ConsulClient.create(vertx,  new ConsulClientOptions().setHost(consulHost).setPort(consulPort));
 
-        serviceId= UUID.randomUUID().toString();
-        var ipAddress=InetAddress.getLocalHost();
-        String httpCheckUrl =String.format("http://%s:%d/authors", ipAddress.getHostAddress(),port);
+    //Observes llama el metodo
+    public void init(@Observes StartupEvent evt, Vertx vertx) throws UnknownHostException {
+        System.out.println("**AuthorsLifeCycle init**");
+
+        ConsulClient client = ConsulClient.create(vertx,
+                new ConsulClientOptions().setHost(consultHost).setPort(consultPort)
+        );
+
+        //genera un random extenso
+        serviceId = UUID.randomUUID().toString();
+        //tambien puedes poner otros atributos for example name addres
+        var ipAddress = InetAddress.getLocalHost();
+        String httpCheckUrl = String.format("http://%s:%d/authors", ipAddress.getHostAddress(), port);
 
         client.registerServiceAndAwait(
                 new ServiceOptions()
@@ -42,16 +52,21 @@ public class AuthorsLifeCycle {
                         .setAddress(ipAddress.getHostAddress())
                         .setPort(port)
                         .setCheckOptions(
-                                new CheckOptions().setHttp(httpCheckUrl)
+                                new CheckOptions()
+                                        .setHttp(httpCheckUrl)
                                         .setInterval("10s")
-                                        .setDeregisterAfter("20s"))
+                                        .setDeregisterAfter("20s")
+                        )
         );
     }
-    public void stop(@Observes ShutdownEvent evt, Vertx vertx){
+    //no es necesario porque el consul lo detiene
+    public void stop(@Observes ShutdownEvent stevt, Vertx vertx) {
+        System.out.println("**AuthorsLifeCycle stop**");
 
-        System.out.println("************AuthorLifecycle stop");
-        ConsulClient client=ConsulClient.create(vertx,  new ConsulClientOptions().setHost(consulHost).setPort(consulPort));
+        ConsulClient client = ConsulClient.create(vertx,
+                new ConsulClientOptions().setHost(consultHost).setPort(consultPort)
+        );
+
         client.deregisterServiceAndAwait(serviceId);
-
     }
 }

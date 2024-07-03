@@ -31,7 +31,7 @@ public class BookRest {
 
     @GET
     public List<BookDto> findAll() {
-        System.out.println("findAll");
+        System.out.println("findAll books");
         var books = br.listAll();
 
         //Metodo API
@@ -58,6 +58,7 @@ public class BookRest {
     @GET
     @Path("/{id}")
     public Response findById(@PathParam("id") Integer id) {
+        System.out.println("findID books");
         var op = br.findByIdOptional(id);
         if (op.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();

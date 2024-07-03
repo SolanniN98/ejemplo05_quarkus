@@ -24,7 +24,7 @@ dependencies {
     implementation("io.quarkus:quarkus-resteasy-reactive-jackson") //JSON
     implementation("io.quarkus:quarkus-hibernate-orm-panache") //JPA Hibernate+ repo
 
-    implementation("org.postgresql:postgresql:42.7.3")
+    //implementation("org.postgresql:postgresql:42.7.3")
     implementation("io.quarkus:quarkus-jdbc-postgresql:3.11.2")
 
     //REGISTRO libreria para interactuar con el servidor
