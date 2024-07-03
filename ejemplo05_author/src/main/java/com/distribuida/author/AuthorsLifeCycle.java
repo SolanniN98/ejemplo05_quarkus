@@ -13,6 +13,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.List;
 import java.util.UUID;
 @ApplicationScoped
 public class AuthorsLifeCycle {
@@ -51,6 +52,14 @@ public class AuthorsLifeCycle {
                         .setId(serviceId)
                         .setAddress(ipAddress.getHostAddress())
                         .setPort(port)
+                        .setTags(
+                                List.of("traefik.enable=true",
+                                        "treafik.http.routers.app-authors.rule=PathPrefix(`/app-authors`)",
+                                        "treafik.http.routers.app-authors.middlewares=app-authors",
+                                        "treafik.http.middlewares.app-authors.stripPrefix.prefixes=/app-authors"
+
+                                        )
+                        )
                         .setCheckOptions(
                                 new CheckOptions()
                                         .setHttp(httpCheckUrl)
