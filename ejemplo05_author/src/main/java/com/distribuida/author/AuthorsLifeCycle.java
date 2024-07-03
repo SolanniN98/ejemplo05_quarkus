@@ -54,11 +54,10 @@ public class AuthorsLifeCycle {
                         .setPort(port)
                         .setTags(
                                 List.of("traefik.enable=true",
-                                        "treafik.http.routers.app-authors.rule=PathPrefix(`/app-authors`)",
-                                        "treafik.http.routers.app-authors.middlewares=app-authors",
-                                        "treafik.http.middlewares.app-authors.stripPrefix.prefixes=/app-authors"
-
-                                        )
+                                        "traefik.http.routers.app-authors.rule=PathPrefix(`/app-authors`)",
+                                        "traefik.http.routers.app-authors.middlewares=app-authors",
+                                        "traefik.http.middlewares.app-authors.stripPrefix.prefixes=/app-authors"
+                                )
                         )
                         .setCheckOptions(
                                 new CheckOptions()

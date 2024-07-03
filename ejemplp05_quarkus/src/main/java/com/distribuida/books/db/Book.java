@@ -14,7 +14,7 @@ public class Book {
     private String isbn;
     private String title;
     private BigDecimal price;
-    @Column(name = "author_id")
+    @Column(name = "autor_id")
     private Integer authorId;
 
 
