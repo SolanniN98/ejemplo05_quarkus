@@ -30,5 +30,6 @@ dependencies {
     //REGISTRO libreria para interactuar con el servidor
     implementation("io.smallrye.reactive:smallrye-mutiny-vertx-consul-client")
 
-
+    //HEALTH
+    implementation("io.quarkus:quarkus-smallrye-health")
 }

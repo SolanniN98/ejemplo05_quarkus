@@ -1,5 +1,10 @@
 #GENERAR LA IMAGEN
-# docker build -t app-authors .
+# docker build -t ejemplp05_quarkus .
+# docker tag app-authors just5ebas/ejemplp05_quarkus --> en caso no se quiera generar la imagen desde 0
+# docker build -t just5ebas/ejemplp05_quarkus .
+
+# docker login
+#docker push just5ebas/ejemplp05_quarkus
 
 FROM eclipse-temurin:17.0.11_9-jre-jammy
 #FROM bellsoft/liberica-runtime-container:jdk-17-glibc

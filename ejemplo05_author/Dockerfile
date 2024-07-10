@@ -1,5 +1,10 @@
 #GENERAR LA IMAGEN
-# docker build -t app-authors .
+# docker build -t ejemplo05_author .
+# docker tag app-authors just5ebas/ejemplo05_author --> en caso no se quiera generar la imagen desde 0
+# docker build -t just5ebas/ejemplo05_author .
+
+# docker login
+#docker push just5ebas/ejemplo05_author
 
 FROM eclipse-temurin:17.0.11_9-jre-jammy
 
