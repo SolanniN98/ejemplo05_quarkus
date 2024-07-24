@@ -27,3 +27,11 @@ Ejecutar con un puerto distinto:
     // Books
     java -Dquarkus.http.port=8090 -jar build/quarkus-app/quarkus-run.jar
     java -Dquarkus.http.port=8091 -jar build/quarkus-app/quarkus-run.jar
+----------------------------------
+Minikube
+    minikube start
+    minikube stop
+    minikube delete -all
+Desplegar:
+    kubectl apply -f app-authors-deployment.yml
+    kubectl apply -f app-books-deployment.yml

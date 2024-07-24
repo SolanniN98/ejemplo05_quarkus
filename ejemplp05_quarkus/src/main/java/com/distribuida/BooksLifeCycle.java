@@ -20,64 +20,64 @@ import java.util.UUID;
 public class BooksLifeCycle {
 
 
-    @ConfigProperty(name = "consul.host", defaultValue = "localhost")
-    private String consultHost;
-
-    //necesario para iniciar el port.
-    @ConfigProperty(name = "consul.port", defaultValue = "8500")
-    private int consultPort;
-
-    @ConfigProperty(name = "quarkus.http.port")
-    private int port;
-
-    //id de la instancia y sea unica
-    private String serviceId;
+//    @ConfigProperty(name = "consul.host", defaultValue = "localhost")
+//    private String consultHost;
+//
+//    //necesario para iniciar el port.
+//    @ConfigProperty(name = "consul.port", defaultValue = "8500")
+//    private int consultPort;
+//
+//    @ConfigProperty(name = "quarkus.http.port")
+//    private int port;
+//
+//    //id de la instancia y sea unica
+//    private String serviceId;
 
     //Observes llama el metodo
     public void init(@Observes StartupEvent evt, Vertx vertx) throws UnknownHostException {
-        System.out.println("**BooksLifeCycle init**");
-
-        ConsulClient client = ConsulClient.create(vertx,
-                new ConsulClientOptions().setHost(consultHost).setPort(consultPort)
-        );
-
-        //genera un random extenso
-        serviceId = UUID.randomUUID().toString();
-        //tambien puedes poner otros atributos for example name addres
-        var ipAddress = InetAddress.getLocalHost();
-        String httpCheckUrl = String.format("http://%s:%d/q/health/live", ipAddress.getHostAddress(), port);
-
-        client.registerServiceAndAwait(
-                new ServiceOptions()
-                        .setName("app-books")
-                        .setId(serviceId)
-                        .setAddress(ipAddress.getHostAddress())
-                        .setPort(port)
-                        .setTags(
-                                List.of(
-                                        "traefik.enable=true",
-                                        "traefik.http.routers.app-books.rule=PathPrefix(`/app-books`)",
-                                        "traefik.http.routers.app-books.middlewares=app-books",
-                                        "traefik.http.middlewares.app-books.stripPrefix.prefixes=/app-books"
-                                )
-                        )
-                        .setCheckOptions(
-                                new CheckOptions()
-                                        .setHttp(httpCheckUrl)
-                                        .setInterval("10s")
-                                        .setDeregisterAfter("20s")
-                        )
-        );
+//        System.out.println("**BooksLifeCycle init**");
+//
+//        ConsulClient client = ConsulClient.create(vertx,
+//                new ConsulClientOptions().setHost(consultHost).setPort(consultPort)
+//        );
+//
+//        //genera un random extenso
+//        serviceId = UUID.randomUUID().toString();
+//        //tambien puedes poner otros atributos for example name addres
+//        var ipAddress = InetAddress.getLocalHost();
+//        String httpCheckUrl = String.format("http://%s:%d/q/health/live", ipAddress.getHostAddress(), port);
+//
+//        client.registerServiceAndAwait(
+//                new ServiceOptions()
+//                        .setName("app-books")
+//                        .setId(serviceId)
+//                        .setAddress(ipAddress.getHostAddress())
+//                        .setPort(port)
+//                        .setTags(
+//                                List.of(
+//                                        "traefik.enable=true",
+//                                        "traefik.http.routers.app-books.rule=PathPrefix(`/app-books`)",
+//                                        "traefik.http.routers.app-books.middlewares=app-books",
+//                                        "traefik.http.middlewares.app-books.stripPrefix.prefixes=/app-books"
+//                                )
+//                        )
+//                        .setCheckOptions(
+//                                new CheckOptions()
+//                                        .setHttp(httpCheckUrl)
+//                                        .setInterval("10s")
+//                                        .setDeregisterAfter("20s")
+//                        )
+//        );
     }
     //no es necesario porque el consul lo detiene
     public void stop(@Observes ShutdownEvent stevt, Vertx vertx) {
-        System.out.println("**BooksLifeCycle stop**");
-
-        ConsulClient client = ConsulClient.create(vertx,
-                new ConsulClientOptions().setHost(consultHost).setPort(consultPort)
-        );
-
-        client.deregisterServiceAndAwait(serviceId);
+//        System.out.println("**BooksLifeCycle stop**");
+//
+//        ConsulClient client = ConsulClient.create(vertx,
+//                new ConsulClientOptions().setHost(consultHost).setPort(consultPort)
+//        );
+//
+//        client.deregisterServiceAndAwait(serviceId);
     }
 
 }
