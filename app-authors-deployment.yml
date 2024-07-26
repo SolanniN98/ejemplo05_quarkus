@@ -25,11 +25,11 @@ spec:
             periodSeconds: 5
           env:
             - name: QUARKUS_DATASOURCE_USERNAME
-              value: distibuida_user
+              value: distribuida
             - name: QUARKUS_DATASOURCE_PASSWORD
-              value: jJ4oJSuEbOWXJVyGVSdfmG5v0Pzn3YPX
+              value: labcom.2015
             - name: QUARKUS_DATASOURCE_JDBC_URL
-              value: jdbc:postgresql://dpg-cqc4g3d6l47c73ctsa3g-a.oregon-postgres.render.com/distibuida
+              value: jdbc:postgresql://db-distribuida-2024.postgres.database.azure.com:5432/distribuida
             - name: QUARKUS_HTTP_PORT
               value: "8080"
 ---
